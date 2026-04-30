@@ -6,9 +6,10 @@ import { ArrowRight } from 'lucide-react';
 import { FadeIn } from '@/components/shared/FadeIn';
 import { SectionHeader } from '@/components/shared/SectionHeader';
 import { trainers } from '@/lib/data';
+import type { ReactNode } from 'react';
 
 const SocialIcon = ({ type }: { type: string }) => {
-  const icons: Record<string, JSX.Element> = {
+  const icons: Record<string, ReactNode> = {
     instagram: (
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
