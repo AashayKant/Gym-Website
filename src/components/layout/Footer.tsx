@@ -49,7 +49,39 @@ const programs = [
 export function Footer() {
   return (
     <footer className="border-t border-white/10 bg-background-elevated">
-      <div className="site-container py-20">
+      <div className="px-4 py-8 md:hidden">
+        <div className="rounded-[28px] border border-white/10 bg-white/[0.035] p-5">
+          <h3 className="font-jakarta text-2xl font-bold text-white">
+            APEX FITNESS<span className="text-accent">.</span>
+          </h3>
+          <p className="mt-3 text-sm leading-6 text-foreground-secondary">
+            Premium coaching, focused training spaces, and clear transformation plans in Jamshedpur.
+          </p>
+          <div className="mt-5 grid grid-cols-2 gap-3">
+            <Link href="/membership" className="btn-primary flex min-h-12 items-center justify-center px-4 text-sm">
+              Free Trial
+            </Link>
+            <a href={`tel:${CONTACT_INFO.phone}`} className="flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/12 bg-white/[0.045] px-4 text-sm font-semibold text-white">
+              <Phone className="h-4 w-4 text-accent" />
+              Call
+            </a>
+          </div>
+        </div>
+
+        <div className="mt-5 grid grid-cols-2 gap-3 text-sm">
+          {quickLinks.slice(0, 6).map((link) => (
+            <Link key={link.href} href={link.href} className="rounded-2xl border border-white/10 bg-background px-4 py-3 text-foreground-secondary">
+              {link.label}
+            </Link>
+          ))}
+        </div>
+
+        <p className="mt-6 text-center text-xs text-foreground-muted">
+          © {new Date().getFullYear()} APEX Fitness Jamshedpur
+        </p>
+      </div>
+
+      <div className="site-container hidden py-20 md:block">
         <div className="mb-14 grid gap-10 rounded-3xl border border-white/10 bg-white/[0.02] p-7 lg:grid-cols-[1.2fr_0.8fr] lg:p-10">
           <div>
             <p className="mb-3 text-xs uppercase tracking-[0.2em] text-foreground-muted">Weekly fitness updates</p>

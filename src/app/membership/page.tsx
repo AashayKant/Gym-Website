@@ -4,7 +4,8 @@ import { FloatingWhatsApp } from '@/components/layout/FloatingWhatsApp';
 import { FadeIn } from '@/components/shared/FadeIn';
 import { SectionHeader } from '@/components/shared/SectionHeader';
 import { pricingPlans } from '@/lib/data';
-import { Check } from 'lucide-react';
+import { CONTACT_INFO, WHATSAPP_MESSAGE } from '@/lib/constants';
+import { ArrowRight, Check, MessageCircle, Phone } from 'lucide-react';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -13,12 +14,91 @@ export const metadata: Metadata = {
 };
 
 export default function MembershipPage() {
+  const highlightedPlan = pricingPlans.find((plan) => plan.highlighted) ?? pricingPlans[0];
+  const whatsappHref = `https://wa.me/${CONTACT_INFO.whatsapp.replace('+', '')}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
+
   return (
     <>
       <Navbar />
       <main>
-        <section className="pt-32 pb-24 bg-background-secondary">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="bg-background-secondary pb-0 pt-0 md:pb-24 md:pt-32">
+          <div className="px-4 pb-8 pt-24 md:hidden">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">Membership</p>
+            <h1 className="mt-3 font-jakarta text-4xl font-bold leading-[1.02] text-white">
+              Choose your training lane.
+            </h1>
+            <p className="mt-3 text-sm leading-6 text-foreground-secondary">
+              Start simple, upgrade when you are ready, and get help choosing the right plan instantly.
+            </p>
+
+            <div className="mt-6 rounded-[30px] border border-accent/55 bg-gradient-to-br from-accent/22 via-white/[0.045] to-background p-5 shadow-[0_24px_80px_rgba(249,115,22,0.16)]">
+              <span className="rounded-full bg-accent px-3 py-1 text-xs font-bold text-white">Recommended</span>
+              <div className="mt-5 flex items-end justify-between gap-4">
+                <div>
+                  <h2 className="font-jakarta text-3xl font-bold">{highlightedPlan.name}</h2>
+                  <p className="mt-1 text-sm text-foreground-secondary">{highlightedPlan.description}</p>
+                </div>
+                <div className="text-right">
+                  <div className="font-jakarta text-2xl font-bold text-white">Rs {highlightedPlan.price.toLocaleString()}</div>
+                  <p className="text-xs text-foreground-secondary">/{highlightedPlan.period}</p>
+                </div>
+              </div>
+              {highlightedPlan.savings && (
+                <p className="mt-4 rounded-2xl border border-green-400/20 bg-green-500/10 px-4 py-3 text-sm font-semibold text-green-400">
+                  {highlightedPlan.savings}
+                </p>
+              )}
+              <div className="mt-5 space-y-3">
+                {highlightedPlan.features.slice(0, 5).map((feature) => (
+                  <div key={feature} className="flex items-center gap-3 text-sm text-white/84">
+                    <Check className="h-4 w-4 shrink-0 text-accent" />
+                    {feature}
+                  </div>
+                ))}
+              </div>
+              <div className="mt-6 grid gap-3">
+                <a href={whatsappHref} target="_blank" rel="noreferrer" className="btn-primary flex min-h-13 items-center justify-center gap-2 px-5 text-sm">
+                  <MessageCircle className="h-4 w-4" />
+                  Ask on WhatsApp
+                </a>
+                <a href={`tel:${CONTACT_INFO.phone}`} className="flex min-h-13 items-center justify-center gap-2 rounded-full border border-white/14 bg-white/[0.04] px-5 text-sm font-semibold text-white">
+                  <Phone className="h-4 w-4 text-accent" />
+                  Call before joining
+                </a>
+              </div>
+            </div>
+
+            <div className="mt-5 space-y-3">
+              {pricingPlans.filter((plan) => plan.id !== highlightedPlan.id).map((plan) => (
+                <a
+                  key={plan.id}
+                  href="/contact"
+                  className="flex items-center justify-between gap-4 rounded-[24px] border border-white/10 bg-white/[0.04] p-4"
+                >
+                  <div>
+                    <h3 className="font-jakarta text-lg font-bold">{plan.name}</h3>
+                    <p className="mt-1 text-xs text-foreground-secondary">{plan.description}</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="font-bold text-white">Rs {plan.price.toLocaleString()}</p>
+                    <p className="text-xs text-foreground-muted">/{plan.period}</p>
+                  </div>
+                  <ArrowRight className="h-4 w-4 shrink-0 text-accent" />
+                </a>
+              ))}
+            </div>
+
+            <div className="mt-5 rounded-[24px] border border-white/10 bg-background p-4">
+              <h2 className="font-jakarta text-xl font-bold">Extra value</h2>
+              <div className="mt-4 grid gap-3 text-sm text-foreground-secondary">
+                <p>Student and corporate discounts are available after verification.</p>
+                <p>Coach onboarding is included with your trial visit.</p>
+                <p>Family and referral offers can be confirmed on WhatsApp.</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="mx-auto hidden max-w-7xl px-4 sm:px-6 md:block lg:px-8">
             <SectionHeader title="MEMBERSHIP PLANS" subtitle="Choose Your Plan" />
             <FadeIn className="mt-12 text-center max-w-3xl mx-auto">
               <p className="text-lg text-foreground-secondary">

@@ -12,23 +12,27 @@ import { BMICalculator } from '@/components/home/BMICalculator';
 import { Facilities } from '@/components/home/Facilities';
 import { FAQSection } from '@/components/home/FAQSection';
 import { CTASection } from '@/components/home/CTASection';
+import { MobileHomeExperience } from '@/components/home/MobileHomeExperience';
 
 export default function Home() {
   return (
     <>
       <Navbar />
       <main>
-        <HeroSection />
-        <TrustBar />
-        <Transformations />
-        <AboutPreview />
-        <ProgramsPreview />
-        <TrainersPreview />
-        <PricingPreview />
-        <Facilities />
-        <BMICalculator />
-        <FAQSection />
-        <CTASection />
+        <MobileHomeExperience />
+        <div className="hidden md:block">
+          <HeroSection />
+          <TrustBar />
+          <Transformations />
+          <AboutPreview />
+          <ProgramsPreview />
+          <TrainersPreview />
+          <PricingPreview />
+          <Facilities />
+          <BMICalculator />
+          <FAQSection />
+          <CTASection />
+        </div>
       </main>
       <Footer />
       <FloatingWhatsApp />

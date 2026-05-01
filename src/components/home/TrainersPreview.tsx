@@ -37,14 +37,14 @@ export function TrainersPreview() {
   const displayedTrainers = trainers.slice(0, 4);
 
   return (
-    <section className="py-24 bg-background">
+    <section className="py-18 bg-background sm:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           title="EXPERT TRAINERS"
           subtitle="Meet Our Team"
         />
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
+        <div className="mt-10 grid gap-5 sm:mt-14 sm:gap-7 md:grid-cols-2 lg:mt-16 lg:grid-cols-4 lg:gap-8">
           {displayedTrainers.map((trainer, index) => (
             <FadeIn key={trainer.id} delay={index * 0.1}>
               <motion.div
@@ -52,25 +52,25 @@ export function TrainersPreview() {
                 className="group relative overflow-hidden rounded-2xl bg-background-secondary border border-white/10"
               >
                 <div
-                  className="h-80 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+                  className="h-72 bg-cover bg-center transition-transform duration-500 group-hover:scale-105 sm:h-80"
                   style={{ backgroundImage: `url(${trainer.image})` }}
                 >
                   <div className="absolute inset-0 bg-gradient-to-t from-background-secondary via-transparent to-transparent" />
                 </div>
 
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <h3 className="text-2xl font-bebas font-bold mb-1">{trainer.name}</h3>
+                <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
+                  <h3 className="mb-1 text-xl font-bold sm:text-2xl">{trainer.name}</h3>
                   <p className="text-accent text-sm font-semibold mb-2">{trainer.specialization}</p>
                   <p className="text-foreground-secondary text-xs mb-3">{trainer.experience} experience</p>
 
-                  <div className="flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <a href={trainer.social.instagram} className="p-2 bg-white/10 rounded-full hover:bg-accent transition-colors">
+                  <div className="flex gap-3 opacity-100 transition-opacity duration-300 md:opacity-0 md:group-hover:opacity-100">
+                    <a href={trainer.social.instagram} className="rounded-full bg-white/10 p-2.5 transition-colors hover:bg-accent">
                       <SocialIcon type="instagram" />
                     </a>
-                    <a href={trainer.social.facebook} className="p-2 bg-white/10 rounded-full hover:bg-accent transition-colors">
+                    <a href={trainer.social.facebook} className="rounded-full bg-white/10 p-2.5 transition-colors hover:bg-accent">
                       <SocialIcon type="facebook" />
                     </a>
-                    <a href={trainer.social.linkedin} className="p-2 bg-white/10 rounded-full hover:bg-accent transition-colors">
+                    <a href={trainer.social.linkedin} className="rounded-full bg-white/10 p-2.5 transition-colors hover:bg-accent">
                       <SocialIcon type="linkedin" />
                     </a>
                   </div>

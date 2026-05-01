@@ -31,8 +31,102 @@ export default function ContactPage() {
     <>
       <Navbar />
       <main>
-        <section className="pt-32 pb-24 bg-background-secondary">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="bg-background-secondary pb-0 pt-0 md:pb-24 md:pt-32">
+          <div className="px-4 pb-8 pt-24 md:hidden">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">Contact APEX</p>
+            <h1 className="mt-3 font-jakarta text-4xl font-bold leading-[1.02] text-white">
+              Book your first visit in seconds.
+            </h1>
+            <p className="mt-3 text-sm leading-6 text-foreground-secondary">
+              WhatsApp is fastest, but you can call, visit, or send your details here.
+            </p>
+
+            <div className="mt-6 grid grid-cols-2 gap-3">
+              <a
+                href={`https://wa.me/${CONTACT_INFO.whatsapp.replace('+', '')}?text=Hi!%20I%20want%20to%20book%20a%20free%20trial%20at%20APEX%20Fitness.`}
+                target="_blank"
+                rel="noreferrer"
+                className="flex min-h-24 flex-col justify-between rounded-[24px] bg-green-500 p-4 font-bold text-white"
+              >
+                <MessageCircle className="h-6 w-6" />
+                WhatsApp Trial
+              </a>
+              <a
+                href={`tel:${CONTACT_INFO.phone}`}
+                className="flex min-h-24 flex-col justify-between rounded-[24px] border border-white/10 bg-white/[0.045] p-4 font-bold text-white"
+              >
+                <Phone className="h-6 w-6 text-accent" />
+                Call Now
+              </a>
+            </div>
+
+            <div className="mt-4 rounded-[26px] border border-white/10 bg-background p-4">
+              <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
+                  <p className="text-sm leading-6 text-foreground-secondary">{CONTACT_INFO.address}</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Clock className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
+                  <div className="text-sm leading-6 text-foreground-secondary">
+                    <p>Mon - Fri: {CONTACT_INFO.workingHours.weekdays}</p>
+                    <p>Saturday: {CONTACT_INFO.workingHours.saturday}</p>
+                    <p>Sunday: {CONTACT_INFO.workingHours.sunday}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <FadeIn className="mt-5">
+              <form onSubmit={handleSubmit} className="rounded-[28px] border border-white/10 bg-white/[0.04] p-4">
+                <h2 className="font-jakarta text-2xl font-bold text-white">Send your details</h2>
+                <div className="mt-5 space-y-4">
+                  <input
+                    type="text"
+                    required
+                    value={formData.name}
+                    onChange={(e) => setFormData({...formData, name: e.target.value})}
+                    className="min-h-13 w-full rounded-2xl border border-white/10 bg-background px-4 text-base outline-none focus:border-accent"
+                    placeholder="Full name"
+                  />
+                  <input
+                    type="tel"
+                    required
+                    value={formData.phone}
+                    onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                    className="min-h-13 w-full rounded-2xl border border-white/10 bg-background px-4 text-base outline-none focus:border-accent"
+                    placeholder="Phone number"
+                  />
+                  <select
+                    value={formData.interest}
+                    onChange={(e) => setFormData({...formData, interest: e.target.value})}
+                    className="min-h-13 w-full rounded-2xl border border-white/10 bg-background px-4 text-base outline-none focus:border-accent"
+                  >
+                    <option value="trial">Free Trial</option>
+                    <option value="membership">Membership</option>
+                    <option value="personal">Personal Training</option>
+                    <option value="general">General Inquiry</option>
+                  </select>
+                  <textarea
+                    rows={3}
+                    value={formData.message}
+                    onChange={(e) => setFormData({...formData, message: e.target.value})}
+                    className="w-full resize-none rounded-2xl border border-white/10 bg-background px-4 py-3 text-base outline-none focus:border-accent"
+                    placeholder="Goal or preferred time"
+                  />
+                  <button
+                    type="submit"
+                    className="btn-primary flex min-h-13 w-full items-center justify-center gap-2 px-5 text-sm"
+                  >
+                    <Send className="h-4 w-4" />
+                    {submitted ? 'Message Sent!' : 'Send Inquiry'}
+                  </button>
+                </div>
+              </form>
+            </FadeIn>
+          </div>
+
+          <div className="mx-auto hidden max-w-7xl px-4 sm:px-6 md:block lg:px-8">
             <SectionHeader title="CONTACT US" subtitle="Get In Touch" />
             <FadeIn className="mt-12 text-center max-w-3xl mx-auto">
               <p className="text-lg text-foreground-secondary">

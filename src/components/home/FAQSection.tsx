@@ -11,11 +11,11 @@ export function FAQSection() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   return (
-    <section className="py-24 bg-background-secondary">
+    <section className="py-18 bg-background-secondary sm:py-24">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader title="FREQUENTLY ASKED QUESTIONS" subtitle="Got Questions?" />
 
-        <div className="mt-16 space-y-4">
+        <div className="mt-10 space-y-3 sm:mt-16 sm:space-y-4">
           {faqs.map((faq, index) => (
             <FadeIn key={index} delay={index * 0.05}>
               <motion.div
@@ -23,9 +23,9 @@ export function FAQSection() {
               >
                 <button
                   onClick={() => setActiveIndex(activeIndex === index ? null : index)}
-                  className="w-full flex items-center justify-between p-6 text-left hover:bg-white/5 transition-colors"
+                  className="flex min-h-14 w-full items-center justify-between p-4 text-left transition-colors hover:bg-white/5 sm:p-6"
                 >
-                  <span className="font-semibold pr-4">{faq.question}</span>
+                  <span className="pr-4 text-[15px] font-semibold sm:text-base">{faq.question}</span>
                   <motion.div
                     animate={{ rotate: activeIndex === index ? 180 : 0 }}
                     transition={{ duration: 0.3 }}
@@ -42,7 +42,7 @@ export function FAQSection() {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <div className="px-6 pb-6 text-foreground-secondary">
+                      <div className="px-4 pb-4 text-sm leading-relaxed text-foreground-secondary sm:px-6 sm:pb-6 sm:text-base">
                         {faq.answer}
                       </div>
                     </motion.div>

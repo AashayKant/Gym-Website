@@ -13,20 +13,20 @@ export function PricingPreview() {
       <div className="site-container">
         <SectionHeader title="Membership plans with clear value" subtitle="Membership" />
 
-        <div className="mt-14 grid gap-7 md:grid-cols-3">
+        <div className="mt-10 grid gap-5 sm:mt-12 sm:gap-7 md:mt-14 md:grid-cols-3">
           {pricingPlans.map((plan, index) => (
             <FadeIn key={plan.id} delay={index * 0.1}>
               <motion.div
                 whileHover={{ y: -10 }}
                 className={cn(
-                  "relative h-full rounded-2xl border p-8 transition-all duration-300",
+                  "relative h-full rounded-2xl border p-5 transition-all duration-300 sm:p-8",
                   plan.highlighted
                     ? "border-accent bg-gradient-to-br from-accent/20 to-accent-secondary/15 shadow-lg shadow-accent/20"
                     : "card-premium border-white/10"
                 )}
               >
                 {plan.highlighted && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-accent to-accent-secondary rounded-full text-sm font-bold">
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-accent to-accent-secondary px-3 py-1 text-xs font-bold sm:-top-4 sm:px-4 sm:text-sm">
                     Most Popular
                   </div>
                 )}
@@ -34,7 +34,7 @@ export function PricingPreview() {
                 <div className="text-center mb-6">
                   <h3 className="mb-2 text-2xl font-semibold">{plan.name}</h3>
                   <p className="text-foreground-secondary text-sm mb-4">{plan.description}</p>
-                  <div className="text-5xl font-bebas font-bold gradient-text mb-2">
+                  <div className="mb-2 text-4xl font-bebas font-bold gradient-text sm:text-5xl">
                     ₹{formatNumber(plan.price)}
                   </div>
                   <p className="text-foreground-secondary text-sm">/{plan.period}</p>
@@ -43,11 +43,11 @@ export function PricingPreview() {
                   )}
                 </div>
 
-                <ul className="space-y-3 mb-8">
+                <ul className="mb-7 space-y-2.5 sm:mb-8 sm:space-y-3">
                   {plan.features.map((feature, i) => (
                     <li key={i} className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                      <span className="text-sm">{feature}</span>
+                      <Check className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
+                      <span className="text-sm leading-relaxed">{feature}</span>
                     </li>
                   ))}
                 </ul>

@@ -21,8 +21,70 @@ export default function GalleryPage() {
     <>
       <Navbar />
       <main>
-        <section className="site-section pt-28">
-          <div className="site-container">
+        <section className="pt-0 md:pb-[var(--section-padding)] md:pt-28">
+          <div className="px-4 pb-8 pt-24 md:hidden">
+            <div className="mb-7">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">APEX gallery</p>
+              <h1 className="mt-3 font-jakarta text-4xl font-bold leading-[1.02] text-white">
+                Train inside the atmosphere.
+              </h1>
+              <p className="mt-3 text-sm leading-6 text-foreground-secondary">
+                Swipe through equipment, classes, coaching moments, and the spaces members use every day.
+              </p>
+            </div>
+
+            <div className="-mx-4 mb-5 flex gap-2 overflow-x-auto px-4 pb-1 [scrollbar-width:none]">
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setFilter(cat)}
+                  className={`min-h-10 shrink-0 rounded-full border px-4 text-xs font-bold capitalize transition ${
+                    filter === cat
+                      ? 'border-accent bg-accent/18 text-white'
+                      : 'border-white/10 bg-white/[0.04] text-foreground-secondary'
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+
+            <div className="space-y-4">
+              {filteredImages.map((image, index) => (
+                <motion.button
+                  key={image.id}
+                  initial={{ opacity: 0, y: 18 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: (index % 5) * 0.035 }}
+                  onClick={() => setSelectedImage(index)}
+                  className="group relative block w-full overflow-hidden rounded-[28px] border border-white/10 bg-surface text-left"
+                >
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    width={900}
+                    height={1200}
+                    loading={index < 2 ? 'eager' : 'lazy'}
+                    sizes="100vw"
+                    className="h-[78vw] max-h-[430px] min-h-[280px] w-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/12 to-transparent" />
+                  <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-4">
+                    <div>
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">{image.category}</p>
+                      <h2 className="mt-1 font-jakarta text-xl font-bold text-white">{image.alt}</h2>
+                    </div>
+                    <span className="rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur-xl">
+                      View
+                    </span>
+                  </div>
+                </motion.button>
+              ))}
+            </div>
+          </div>
+
+          <div className="site-container hidden md:block">
             <div className="mb-12 max-w-3xl">
               <p className="text-xs uppercase tracking-[0.2em] text-foreground-muted">Cinematic fitness showcase</p>
               <h1 className="mt-4 text-balance text-4xl font-jakarta font-bold text-white md:text-6xl">
